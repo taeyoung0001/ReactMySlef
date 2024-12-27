@@ -5,28 +5,26 @@ import Post from "./Post";
 import classes from "./PostsList.module.css";
 import Modal from "./Modal";
 
-const PostsList = () => {
+const PostsList = (isPosting) => {
   //상태 추가
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredName, setEnteredName] = useState("");
-  const [modalIsVisble, setModalIsVisble] = useState(true);
+
   //함수
   //바디값 불러오기
   const bodyChangeHandler = (e) => {
     setEnteredBody(e.target.value);
   };
+
   //이름값 불러오기
   const nameChangeHandler = (e) => {
     setEnteredName(e.target.value);
-  };
-  const hideModalHandler = () => {
-    setModalIsVisble(false);
   };
 
   return (
     <>
       {/* 조건부랜더링 &&를 쓰면 참일때 코드 실행 아니면 null */}
-      {modalIsVisble && (
+      {isPosting && (
         <Modal onClose={hideModalHandler}>
           <NewPost
             onBodyChange={bodyChangeHandler}
