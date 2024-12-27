@@ -1,0 +1,21 @@
+body {
+  background-color: rgb(83, 46, 207);
+  font-family: "Gothic A1", serif;
+}
+
+.post {
+  background-color: rgb(144, 118, 231);
+
+  text-align: center;
+  list-style: none;
+}
+
+.author {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.body {
+  font-size: 16px;
+  font-weight: 500;
+}
