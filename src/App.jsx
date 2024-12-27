@@ -1,13 +1,13 @@
 import { useState } from "react";
 import "./App.css";
-import PostList from "./components/PostList";
+import PostsList from "./components/PostsList";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
     <main>
-      <PostList />
+      <PostsList />
     </main>
   );
 }

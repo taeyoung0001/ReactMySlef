@@ -5,17 +5,19 @@ body {
 
 .post {
   background-color: rgb(144, 118, 231);
-
-  text-align: center;
+  border-radius: 10px;
   list-style: none;
+  padding: 1rem;
 }
 
 .author {
-  font-size: 20px;
+  font-size: 18px;
   font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
 }
 
 .body {
   font-size: 16px;
   font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
 }
