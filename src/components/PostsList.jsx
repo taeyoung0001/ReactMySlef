@@ -44,3 +44,5 @@ const PostsList = ({ isPosting, onStopPosting }) => {
 export default PostsList;
 
 //onClose 함수를 사용해서 자식요소에게 hideModalHandler 함수를  전달함
+
+//props 를 바로 쓸때는 { }안에 {{}} 이렇게 해야함
