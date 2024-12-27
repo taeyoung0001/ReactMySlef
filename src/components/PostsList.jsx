@@ -5,7 +5,7 @@ import Post from "./Post";
 import classes from "./PostsList.module.css";
 import Modal from "./Modal";
 
-const PostsList = (isPosting) => {
+const PostsList = ({ isPosting, onStopPosting }) => {
   //상태 추가
   const [enteredBody, setEnteredBody] = useState("");
   const [enteredName, setEnteredName] = useState("");
@@ -25,7 +25,7 @@ const PostsList = (isPosting) => {
     <>
       {/* 조건부랜더링 &&를 쓰면 참일때 코드 실행 아니면 null */}
       {isPosting && (
-        <Modal onClose={hideModalHandler}>
+        <Modal onClose={onStopPosting}>
           <NewPost
             onBodyChange={bodyChangeHandler}
             onNameChange={nameChangeHandler}
