@@ -1,37 +1,59 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-import NewPost from "./NewPost";
 import Post from "./Post";
 import classes from "./PostsList.module.css";
-import Modal from "./Modal";
 
-const PostsList = ({ isPosting, onStopPosting }) => {
+const PostsList = () => {
   const [posts, setPosts] = useState([]);
+  const [isFetching, setIsFetching] = useState(false);
+  // 로딩창 구현
+
+  //posts 가져오기
+  useEffect(() => {
+    const fetchPosts = async () => {
+      setIsFetching(true);
+      const response = await fetch("http://localhost:8080/posts");
+      const resData = await response.json();
+      setPosts(resData.posts);
+      setIsFetching(false);
+    };
+    fetchPosts();
+  }, []);
+
+  // https가 아니라 http임
+  // 서버에 저장하기
   const addPostsHandler = (postData) => {
+    fetch("http://localhost:8080/posts", {
+      method: "POST",
+      body: JSON.stringify(postData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
     setPosts((existingPosts) => [postData, ...existingPosts]);
   };
+
   return (
     <>
-      {/* 조건부랜더링 &&를 쓰면 참일때 코드 실행 아니면 null */}
-      {isPosting && (
-        <Modal onClose={onStopPosting}>
-          <NewPost onCancel={onStopPosting} onAddpost={addPostsHandler} />
-        </Modal>
-      )}
-
       {/* {posts}쓰려면 jsx파일로 변환해야함 */}
-      {posts.length > 0 && (
+      {!isFetching && posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
             <Post key={post.body} author={post.author} body={post.body} />
           ))}
         </ul>
       )}
-      {posts.length == 0 && (
+      {!isFetching && posts.length == 0 && (
         <div style={{ textAlign: "center", color: "white" }}>
           <h2>There are no posts yet...</h2>
           <p>Start adding some!</p>
         </div>
+      )}
+      {isFetching && (
+        <p style={{ textAlign: "center", color: "white" }}>
+          Loading... for your poasts
+        </p>
       )}
     </>
   );

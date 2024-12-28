@@ -1,10 +1,28 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import "./index.css";
+import Posts from "./routes/Posts";
+import NewPost from "./routes/NewPost";
+import RootLayout from "./routes/RootLayout";
 
-createRoot(document.getElementById('root')).render(
+const router = createBrowserRouter([
+  //컴포넌트 레이아웃 라우터로 랜더링 하기
+  {
+    path: "/",
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/",
+        element: <Posts />,
+        children: [{ path: "/create-post", element: <NewPost /> }],
+      },
+    ],
+  },
+]);
+
+createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App />
-  </StrictMode>,
-)
+    <RouterProvider router={router} />
+  </StrictMode>
+);

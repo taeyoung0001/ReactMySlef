@@ -1,8 +1,9 @@
+import { Link } from "react-router-dom";
 import { MdPostAdd, MdMessage } from "react-icons/md";
 
 import classes from "./MainHeader.module.css";
 
-function MainHeader({ onCreatePost }) {
+function MainHeader() {
   return (
     <header className={classes.header}>
       <h1 className={classes.logo}>
@@ -10,13 +11,16 @@ function MainHeader({ onCreatePost }) {
         React Poster
       </h1>
       <p>
-        <button className={classes.button} onClick={onCreatePost}>
+        <Link to="/create-post" className={classes.button}>
           <MdPostAdd size={18} />
           New Post
-        </button>
+        </Link>
       </p>
     </header>
   );
 }
 
 export default MainHeader;
+
+// Link는 새로고침을 하지 않는다.
+// a태그는 새로고침해서 성능상 구지다.
