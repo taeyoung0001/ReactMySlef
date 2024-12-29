@@ -1,24 +1,10 @@
-import { useState, useEffect } from "react";
+import { useLoaderData } from "react-router-dom";
 
 import Post from "./Post";
 import classes from "./PostsList.module.css";
 
 const PostsList = () => {
-  const [posts, setPosts] = useState([]);
-  const [isFetching, setIsFetching] = useState(false);
-  // 로딩창 구현
-
-  //posts 가져오기
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setIsFetching(true);
-      const response = await fetch("http://localhost:8080/posts");
-      const resData = await response.json();
-      setPosts(resData.posts);
-      setIsFetching(false);
-    };
-    fetchPosts();
-  }, []);
+  const posts = useLoaderData();
 
   // https가 아니라 http임
   // 서버에 저장하기
@@ -37,23 +23,18 @@ const PostsList = () => {
   return (
     <>
       {/* {posts}쓰려면 jsx파일로 변환해야함 */}
-      {!isFetching && posts.length > 0 && (
+      {posts.length > 0 && (
         <ul className={classes.posts}>
           {posts.map((post) => (
             <Post key={post.body} author={post.author} body={post.body} />
           ))}
         </ul>
       )}
-      {!isFetching && posts.length == 0 && (
+      {posts.length == 0 && (
         <div style={{ textAlign: "center", color: "white" }}>
           <h2>There are no posts yet...</h2>
           <p>Start adding some!</p>
         </div>
-      )}
-      {isFetching && (
-        <p style={{ textAlign: "center", color: "white" }}>
-          Loading... for your poasts
-        </p>
       )}
     </>
   );
