@@ -1,10 +1,16 @@
 import Link from "next/link";
+import { Suspense } from "react";
 import classes from "./page.module.css";
 import MealsGrid from "@/components/meals/meals-gird";
 import { getMeals } from "@/lib/meal";
 
-const MealsPage = async () => {
+//데이터 불러오기
+const Meals = async () => {
   const meals = await getMeals();
+  return <MealsGrid meals={meals} />;
+};
+
+const MealsPage = () => {
   return (
     <>
       <header className={classes.header}>
@@ -18,7 +24,9 @@ const MealsPage = async () => {
         </p>
       </header>
       <main className={classes.main}>
-        <MealsGrid meals={meals}></MealsGrid>
+        <Suspense fallback={<p className={classes.loading}> Loading ...</p>}>
+          <Meals />
+        </Suspense>
       </main>
     </>
   );
