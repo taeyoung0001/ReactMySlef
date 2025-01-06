@@ -3,7 +3,6 @@ import MealItem from "./meal-item";
 import classes from "./meals-gird.module.css";
 
 const MealsGrid = ({ meals }) => {
-  console.log(meals);
   return (
     <ul className={classes.meals}>
       {meals.map((meal) => {

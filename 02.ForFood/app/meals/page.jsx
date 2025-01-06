@@ -7,6 +7,7 @@ import { getMeals } from "@/lib/meal";
 //데이터 불러오기
 const Meals = async () => {
   const meals = await getMeals();
+
   return <MealsGrid meals={meals} />;
 };
 

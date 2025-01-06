@@ -6,6 +6,12 @@ const db = sql("meals.db");
 //열만 가져올때는 get
 
 export async function getMeals() {
-  await new Promise((resolve) => setTimeout(resolve, 2000));
+  await new Promise((resolve) => setTimeout(resolve, 5000));
   return db.prepare("SELECT * FROM meals").all();
 }
+
+export function getMeal(slug) {
+  return db.prepare("SELECT * FROM meals WHERE slug = ?").get(slug);
+}
+
+export const saveMela = () => {};
